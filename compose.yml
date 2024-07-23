@@ -22,7 +22,7 @@ services:
     networks:
       - backend
   pgsql:
-    image: postgres:13
+    image: postgres:16
     environment:
       POSTGRES_DB: skeleton
       POSTGRES_USER: skeleton
