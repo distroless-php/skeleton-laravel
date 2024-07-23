@@ -12,7 +12,7 @@ $ docker compose run cli -c 'cp .env.example .env && composer install && php art
 $ docker compose up -d
 ```
 
-and open `http://localhost:8931` in your browser.
+and open `http://localhost:8931` 🥬 in your browser.
 
 if you need check the connection to the services, open `http://localhost:8931/test-connections` in your browser.
 
