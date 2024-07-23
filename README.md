@@ -6,7 +6,7 @@ This is an example of a Laravel application running on `distroless-php`.
 
 ```bash
 $ git clone --recursive "https://github.com/distroless-php/skeleton-laravel" "skeleton-laravel"
-$ cd "skeleton_laravel"
+$ cd "skeleton-laravel"
 $ docker compose build --pull
 $ docker compose run cli -c 'cp .env.example .env && composer install && php artisan key:generate && php artisan migrate --force --seed'
 $ docker compose up -d
