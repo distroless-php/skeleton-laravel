@@ -1,0 +1,93 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: skeleton
+      MYSQL_DATABASE: skeleton
+      MYSQL_USER: skeleton
+      MYSQL_PASSWORD: skeleton
+    volumes:
+      - mysql_persist:/var/lib/mysql
+    networks:
+      - backend
+  mariadb:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: skeleton
+      MARIADB_DATABASE: skeleton
+      MARIADB_USER: skeleton
+      MARIADB_PASSWORD: skeleton
+    volumes:
+      - mariadb_persist:/var/lib/mysql
+    networks:
+      - backend
+  pgsql:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: skeleton
+      POSTGRES_USER: skeleton
+      POSTGRES_PASSWORD: skeleton
+    volumes:
+      - postgres_persist:/var/lib/postgresql/data
+    networks:
+      - backend
+  redis_main:
+    image: redis:latest
+    volumes:
+      - redis_main_persist:/data
+    networks:
+      - backend
+  redis_cache:
+    image: redis:latest
+    networks:
+      - backend
+  fpm:
+    build:
+      context: ./containers
+      dockerfile: ./fpm/Dockerfile
+    volumes:
+      - ./application:/var/www/html
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      - mysql
+      - pgsql
+      - mariadb
+      - redis_main
+      - redis_cache
+  cli:
+    build:
+      context: ./containers
+      dockerfile: ./cli/Dockerfile
+    entrypoint: /bin/sh
+    working_dir: /application
+    volumes:
+      - ./application:/application
+    networks:
+      - backend
+    depends_on:
+      - mysql
+      - pgsql
+      - mariadb
+      - redis_main
+      - redis_cache
+  nginx:
+    image: nginx:latest
+    ports:
+      - 8931:80
+    volumes:
+      - ./application:/var/www/html
+      - ./nginx/etc/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - frontend
+    depends_on:
+      - fpm
+volumes:
+  mysql_persist:
+  mariadb_persist:
+  postgres_persist:
+  redis_main_persist:
+networks:
+  frontend:
+  backend:
