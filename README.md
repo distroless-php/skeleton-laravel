@@ -5,7 +5,7 @@ This is an example of a Laravel application running on `distroless-php`.
 ## Usage
 
 ```bash
-$ git clone --recursive "https://github.com/distroless-php/skeleton-laravel" "skeleton-laravel"
+$ git clone --recursive "https://github.com/distroless-php/skeleton-laravel.git" "skeleton-laravel"
 $ cd "skeleton-laravel"
 $ docker compose build --pull
 $ docker compose run cli -c 'cp .env.example .env && composer install && php artisan key:generate && php artisan migrate --force --seed'
@@ -23,6 +23,7 @@ $ docker compose run cli
 $ php artisan app:test-connections
 Testing database connections...
 - database connection mysql is OK
+- database connection mariadb is OK
 - database connection pgsql is OK
 - database connection sqlite is OK
 Testing redis connections...
