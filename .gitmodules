@@ -1,0 +1,4 @@
+[submodule "phpredis/phpredis"]
+	path = containers/third_party/redis
+	url = https://github.com/phpredis/phpredis.git
+	branch = 6.0.2
