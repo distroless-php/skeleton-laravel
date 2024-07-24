@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use App\Services\TestConnectionService;
 use Illuminate\Console\Command;
 
-class TestConnectionCommand extends Command
+class TestConnectionsCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -24,7 +26,7 @@ class TestConnectionCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(TestConnectionService $service)
+    public function handle(TestConnectionService $service): void
     {
         foreach ($service->testPredefinedConnections() as $type => $connections) {
             $this->info("Testing {$type} connections...");

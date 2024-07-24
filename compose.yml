@@ -78,7 +78,7 @@ services:
       - 8931:80
     volumes:
       - ./application:/var/www/html
-      - ./nginx/etc/nginx/conf.d:/etc/nginx/conf.d
+      - ./containers/nginx/etc/nginx/conf.d:/etc/nginx/conf.d
     networks:
       - frontend
     depends_on:

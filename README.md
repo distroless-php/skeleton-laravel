@@ -8,7 +8,7 @@ This is an example of a Laravel application running on `distroless-php`.
 $ git clone --recursive "https://github.com/distroless-php/skeleton-laravel.git" "skeleton-laravel"
 $ cd "skeleton-laravel"
 $ docker compose build --pull
-$ docker compose run cli -c 'cp .env.example .env && composer install && php artisan key:generate && php artisan migrate --force --seed'
+$ docker compose run --rm cli -c 'cp .env.example .env && composer install && php artisan key:generate && php artisan migrate --force --seed'
 $ docker compose up -d
 ```
 
@@ -19,7 +19,7 @@ if you need check the connection to the services, open `http://localhost:8931/te
 ### CLI
 
 ```bash
-$ docker compose run cli
+$ docker compose run --rm cli
 $ php artisan app:test-connections
 Testing database connections...
 - database connection mysql is OK
